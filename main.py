@@ -41,55 +41,53 @@ def index():
     data = query_database(DATABASE_ID)
     percent = calculate_checked_percent(data, "Positive")
     return render_template_string("""
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>Checked Percentage</title>
-        <style>
-            body {
-                font-family: sans-serif;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 100vh;
-                background-color: transparent; /* прозорий фон для body */
-            }
-            .circle-wrap {
-                width: 200px;
-                height: 200px;
-                background: conic-gradient(
-                    #4caf50 0% {{ percent }}%, 
-                    #f44336 {{ percent }}% 100%
-                );
-                border-radius: 50%;
-                position: relative;
-                box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            }
-            .circle-inner {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                width: 140px;
-                height: 140px;
-                background: transparent; /* прозорий фон всередині круга */
-                border-radius: 50%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                font-size: 24px;
-                font-weight: bold;
-                color: #333;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="circle-wrap">
-            <div class="circle-inner">{{ percent }}%</div>
-        </div>
-    </body>
-    </html>
-    """, percent=f"{percent:.0f}")
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checked Percentage</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: transparent;
+        }
+        .circle-container {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .circle {
+            width: 200px;
+            height: 200px;
+            background: conic-gradient(
+                #4caf50 0% {{ percent }}%, 
+                #f44336 {{ percent }}% 100%
+            );
+            border-radius: 50%;
+            mask: radial-gradient(circle at center, transparent 35%, black 36%);
+            -webkit-mask: radial-gradient(circle at center, transparent 35%, black 36%);
+        }
+        .percent-text {
+            position: absolute;
+            font-size: 22px;
+            font-weight: bold;
+            color: #333;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="circle-container">
+        <div class="circle"></div>
+        <div class="percent-text">{{ percent }}%</div>
+    </div>
+</body>
+</html>
+""", percent=f"{percent:.0f}")
+
 
 
 if __name__ == "__main__":
