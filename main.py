@@ -79,7 +79,7 @@ def index():
             transform: translate(-50%, -50%);
             font-size: 22px;
             font-weight: bold;
-            color: #333;
+            color: #ffffff;
             pointer-events: none;
         }
     </style>
