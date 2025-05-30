@@ -40,58 +40,71 @@ def calculate_checked_percent(data, checkbox_field_name):
 def index():
     data = query_database(DATABASE_ID)
     percent = calculate_checked_percent(data, "Positive")
+    total_trades = len(data.get("results", []))
     return render_template_string("""
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Checked Percentage</title>
-    <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            width: 100%;
-            background: transparent;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .circle-container {
-            width: 200px;
-            height: 200px;
-            position: relative;
-        }
-        .circle {
-            width: 200px;
-            height: 200px;
-            background: conic-gradient(
-                #4caf50 0% {{ percent }}%, 
-                #f44336 {{ percent }}% 100%
-            );
-            border-radius: 50%;
-            mask: radial-gradient(circle at center, transparent 35%, black 36%);
-            -webkit-mask: radial-gradient(circle at center, transparent 35%, black 36%);
-        }
-        .percent-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 22px;
-            font-weight: bold;
-            color: #ffffff;
-            pointer-events: none;
-        }
-    </style>
-</head>
-<body>
-    <div class="circle-container">
-        <div class="circle"></div>
-        <div class="percent-text">{{ percent }}%</div>
-    </div>
-</body>
-</html>
-""", percent=f"{percent:.0f}")
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Checked Percentage</title>
+        <style>
+            html, body {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                width: 100%;
+                background: transparent;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                font-family: sans-serif;
+            }
+            .circle-container {
+                width: 200px;
+                height: 200px;
+                position: relative;
+            }
+            .circle {
+                width: 200px;
+                height: 200px;
+                background: conic-gradient(
+                    #4caf50 0% {{ percent }}%, 
+                    #f44336 {{ percent }}% 100%
+                );
+                border-radius: 50%;
+                mask: radial-gradient(circle at center, transparent 35%, black 36%);
+                -webkit-mask: radial-gradient(circle at center, transparent 35%, black 36%);
+            }
+            .percent-text {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 22px;
+                font-weight: bold;
+                color: #ffffff;
+                pointer-events: none;
+            }
+            .info-text {
+                margin-top: 20px;
+                text-align: center;
+                color: #ffffff;
+                font-size: 16px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="circle-container">
+            <div class="circle"></div>
+            <div class="percent-text">{{ percent }}%</div>
+        </div>
+        <div class="info-text">
+            <div><strong>Загальний Win Rate</strong></div>
+            <div>Кількість угод: {{ total_trades }}</div>
+        </div>
+    </body>
+    </html>
+    """, percent=f"{percent:.0f}", total_trades=total_trades)
 
 
 
