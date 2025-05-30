@@ -52,7 +52,8 @@ def index():
                 justify-content: center;
                 align-items: center;
                 height: 100vh;
-                background-color: #f5f5f5;
+                background-color: transparent; /* прозорий фон для body */
+                margin: 0; /* прибираємо відступи */
             }
             .circle-wrap {
                 width: 200px;
@@ -72,7 +73,7 @@ def index():
                 transform: translate(-50%, -50%);
                 width: 140px;
                 height: 140px;
-                background: white;
+                background: transparent; /* прозорий фон всередині круга */
                 border-radius: 50%;
                 display: flex;
                 justify-content: center;
@@ -90,6 +91,7 @@ def index():
     </body>
     </html>
     """, percent=f"{percent:.0f}")
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
