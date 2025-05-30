@@ -58,8 +58,8 @@ def index():
                 width: 200px;
                 height: 200px;
                 background: conic-gradient(
-                    #4caf50 {{ percent }}%, 
-                    #ddd 0
+                    #4caf50 0% {{ percent }}%, 
+                    #f44336 {{ percent }}% 100%
                 );
                 border-radius: 50%;
                 position: relative;
