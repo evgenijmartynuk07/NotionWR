@@ -49,15 +49,17 @@ def index():
         html, body {
             margin: 0;
             padding: 0;
+            height: 100%;
+            width: 100%;
             background: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .circle-container {
             width: 200px;
             height: 200px;
             position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
         .circle {
             width: 200px;
@@ -72,6 +74,9 @@ def index():
         }
         .percent-text {
             position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             font-size: 22px;
             font-weight: bold;
             color: #333;
