@@ -53,7 +53,6 @@ def index():
                 align-items: center;
                 height: 100vh;
                 background-color: transparent; /* прозорий фон для body */
-                margin: 0; /* прибираємо відступи */
             }
             .circle-wrap {
                 width: 200px;
