@@ -18,7 +18,6 @@ def query_database(database_id):
     response = requests.post(url, headers=headers)
     response.raise_for_status()
     return response.json()
-
 def calculate_checked_percent(data, checkbox_field_name):
     total = 0
     checked_count = 0
