@@ -18,6 +18,7 @@ def query_database(database_id):
     response = requests.post(url, headers=headers)
     response.raise_for_status()
     return response.json()
+
 def calculate_checked_percent(data, checkbox_field_name):
     total = 0
     checked_count = 0
@@ -495,7 +496,7 @@ def add_trade():
         "parent": {"database_id": DATABASE_ID},
         "properties": {
             "Positive": {"checkbox": 'result' in request.form},
-            "RR": {"number": float(request.form['rr'])},
+            "RR": {"number": float(request.form['rr']) if float(request.form['rr']) > 0 else None},
             "Date": {"date": {"start": request.form['trade_date']}}
             
         }
